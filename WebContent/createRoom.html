@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Organise Meeting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="favicon.png">
+</head>
+
+<body style="height: 100% ; " >
+  <div class="signup__container" style="height: 90%;">
+  <div class="container__child signup__thumbnail" style="background-image: url(img/back.jpg);">
+    <div class="thumbnail__logo">
+      <h1 class="logo__text" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspAutomated Meeting Room Booking System</h1>
+    </div>
+    <div class="thumbnail__content text-center">
+      <h1 class="heading--primary" align="center" style="margin-top: -55%;background-color: orangered;border-radius: 9px"">Create a New Meeting Room</h1><br><br><br><br>
+    </div>
+    <div class="signup__overlay"></div>
+  </div>
+  <div class="container__child signup__form"style="background-color: grey">
+    <form action="#" method="post" onSubmit="return checksubmit();" style="margin-top: 20%">
+          <label for="year">Room Name</label>&nbsp&nbsp&nbsp&nbsp
+          <input class="form-control" type="text" name="name" id="name" onKeyUp="checkname()" required autocomplete="off" style="border-color: orangered">
+          <div id="checkname" align="center"></div><br>
+          <label for="year">Seating Capacity</label>
+          <input class="form-control" type="text" name="seats" id="seats" onKeyUp="checkseats()" required autocomplete="off" style="border-color: orangered">
+          <div id="checkseats" align="center"></div><br>
+          <h1>Amenities Available</h1>
+          <div style="font-size: 15px;padding: 25px" id="amenities">
+            <input type="checkbox" name="amenities" value="Projector" onclick="ValidateSelection();">Projector <br>
+            <input type="checkbox" name="amenities" value="WiFi Connection" onclick=" ValidateSelection();">WiFi Connection<br>
+            <input type="checkbox" name="amenities" value="Whiteboard" onclick="ValidateSelection();">Whiteboard<br>
+            <input type="checkbox" name="amenities" value="Water Dispenser" onclick="ValidateSelection();">Water Dispenser<br>
+            <input type="checkbox" name="amenities" value="TV" onclick="ValidateSelection();">TV<br>
+            <input type="checkbox" name="amenities" value="Coffee Machine" onclick="ValidateSelection();">Coffee machine<br>
+            <input type="checkbox" name="amenities" value="Conference Call" onclick="ValidateSelection();">Conference Call<br>
+            <br><div id="amenitieserr" align="center"></div>
+          </div>
+          <div class="m-t-lg" align="center">
+                <input class="btn btn--form" id="submit" name="submit" type="submit" value="Create Room" />
+          </div>
+  
+    </form> 
+  </div>
+</div>
+</body>
+</html>
+<script>
+   function ValidateSelection()  
+          {  
+              var checkboxes = document.getElementsByName("amenities");  
+              var numberOfCheckedItems = 0;  
+              for(var i = 0; i < checkboxes.length; i++)  
+              {  
+                  if(checkboxes[i].checked)  
+                      numberOfCheckedItems++;  
+              }  
+              if(numberOfCheckedItems < 2)  
+              {  
+                  document.getElementById('amenitieserr').innerHTML="<font style=\"color: red\">*Please select atleast 2 amenities</font>"; 
+                  return false;  
+              }  
+              else  
+              {  
+                  document.getElementById('amenitieserr').innerHTML="<font style=\"color: green\">*Atleast 2 amenities selected</font>"; 
+                  return true;  
+              } 
+          } 
+function checkname()
+{
+  var name = document.getElementById("name").value;
+  if (name == null || name == "") 
+  {
+        document.getElementById('checkname').innerHTML="<font style=\"color: red\">*Please Fill in the Full Name</font>";
+    document.getElementById('name').style.border='red 1px solid';
+    return false;
+  }
+  else if((name.search(/[^A-Za-z\s]/) != -1))
+  {
+    document.getElementById('checkname').innerHTML="<font style=\"color: red\">*Format Invalid</font>";
+    document.getElementById('name').style.border='red 1px solid';
+    return false;
+  }
+  else 
+  {
+    document.getElementById('checkname').innerHTML="<font style=\"color: green\"></font>";
+    document.getElementById('name').style.border='grey 1px solid'; 
+    return true;
+  }
+}
+
+function checkseats()
+  {
+    var seats = document.getElementById("seats").value; 
+    
+    if(isNaN(seats))
+    {
+      document.getElementById('checkseats').innerHTML="<font style=\"color: red\">*Format Invalid</font>";
+      document.getElementById('seats').style.border='red 1px solid';
+      return false;
+    }
+    else if(seats.length == 0)
+    {
+      document.getElementById('checkseats').innerHTML="<font style=\"color: red\">*Format Invalid(0 seats)</font>";
+      document.getElementById('seats').style.border='red 1px solid';
+      return false;
+    }
+    else 
+    {
+      document.getElementById('checkseats').innerHTML="<font style=\"color: green\"></font>";
+      document.getElementById('seats').style.border='grey 1px solid'; 
+      return true;
+    }
+  }
+
+  function clearfields()
+  {
+    document.getElementById('checkname').innerHTML="";
+    document.getElementById('fname').style.border='grey 1px solid';
+    
+    document.getElementById('checkseats').innerHTML="";
+    document.getElementById('seats').style.border='grey 1px solid';
+    
+  }
+  function checksubmit()
+  {
+    var submit = document.getElementById("submit").value;
+      var a = checkname();
+      var b = checkseats();
+      var c = ValidateSelection();
+    if(a&&b&&c)
+      return true;
+    else 
+      return false;
+  }
+</script>
