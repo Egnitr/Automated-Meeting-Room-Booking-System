@@ -27,7 +27,7 @@ public class LoggerFile {
 		
 		try {
 
-			FileHandler f = new FileHandler("d:/JsonLogFile.log",true);
+			FileHandler f = new FileHandler("JsonLogFile.log",true);
 			
 			SimpleFormatter formatter = new SimpleFormatter();
 			f.setFormatter(formatter);
