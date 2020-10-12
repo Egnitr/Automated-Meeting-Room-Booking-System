@@ -1,0 +1,114 @@
+connect 'jdbc:derby://localhost:1527/RoomBooking2;create=true';
+
+
+create table Users(
+
+	userId INT not null,
+	userName varchar(30) not null,
+	email varchar(35) not null,
+	phone varchar(10) not null,
+	role varchar(10) not null,
+	credit INT not null with default 0,
+	lastLoggedIn varchar(30) not null,
+
+	primary key(userId),
+
+	constraint invalidcredit check(credit<2001),
+	 constraint invaliduserid check(userId>0)
+
+);
+
+
+create table MeetingRoom(
+
+	roomName varchar(20) not null,
+	seatingCapacity INT not null,
+	ratings float not null,
+	noOfRatings INT not null,
+	costPerHour INT not null,
+
+	primary key(roomName),
+
+	check(seatingCapacity>0)
+);
+
+
+create table RoomTypes(
+
+	roomName varchar(20) not null,
+	roomType varchar(30) not null,
+
+	primary key(roomName, roomType),
+	foreign key(roomName) references MeetingRoom(roomName) ON DELETE CASCADE ON UPDATE Restrict
+);
+
+
+create table RoomAmenities(
+
+	roomName varchar(20) not null,
+	roomAmenity varchar(30) not null,
+
+	primary key(roomName, roomAmenity),
+	foreign key(roomName) references MeetingRoom(roomName) ON DELETE CASCADE ON UPDATE Restrict
+);
+
+
+create table BookingInfo(
+
+	bookingId INT not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+	roomName varchar(20) not null,
+	userId INT not null,
+	date DATE not null,
+	startTime TIME not null,
+	endTime TIME not null,
+	isRated varchar(5) not null,
+
+	primary key(bookingId),
+	foreign key(roomName) references MeetingRoom(roomName) on update restrict ON DELETE CASCADE,
+	foreign key(userId) references Users(userId) on update restrict ON DELETE CASCADE,
+
+	check (bookingId>0)
+);
+
+
+create table Meeting (
+
+	bookingId INT not null,
+	title varchar(30) not null,
+	type varchar(30) not null,
+	meetingInfo varchar(100) not null,
+
+	primary key(bookingId),
+	foreign key(bookingId) references BookingInfo(bookingId) ON DELETE CASCADE ON UPDATE Restrict
+);
+
+
+create table Attend(
+
+	bookingId INT not null,
+	userId INT not null,
+
+	primary key(bookingId, userId),
+	foreign key(bookingId) references Meeting(bookingId) ON DELETE CASCADE ON UPDATE Restrict,
+	foreign key(userId) references Users(userId) ON DELETE CASCADE ON UPDATE Restrict
+);
+
+
+create table util(count int, currentyear int);
+
+insert into util values(101, 2020);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

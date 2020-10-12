@@ -1,0 +1,53 @@
+{"Users":[
+	{
+		"name" : "ram",
+		"email":"ram@gmail.com",
+		"phone":"9416153157",
+		"role":"Admin"
+	},
+	{
+		"name" : "kush",
+		"email":"kush@gmail.com",
+		"phone":"9416153198",
+		"role":"Admin"
+	},
+	{
+		"name" : "loki",
+		"email":"loki@gmail.com",
+		"phone":"9416153158",
+		"role":"Admin"
+	},
+	{
+		"name" : "abhishek",
+		"email":"abhishek@gmail.com",
+		"phone":"9416156666",
+		"role":"Manager"
+	},
+	{
+		"name" : "karan",
+		"email":"karan@gmail.com",
+		"phone":"9416153887",
+		"role":"Manager"
+	},
+	{
+		"name" : "poki",
+		"email":"poki@gmail.com",
+		"phone":"9414453157",
+		"role":"Manager"
+	},
+	{
+		"name" : "dev",
+		"email":"dev@gmail.com",
+		"phone":"9411153157",
+		"role":"Member"
+	}
+	,
+	{
+		"name" : "shukla",
+		"email":"shukla@gmail.com",
+		"phone":"9411199157",
+		"role":"Member"
+	}
+]
+}
+
